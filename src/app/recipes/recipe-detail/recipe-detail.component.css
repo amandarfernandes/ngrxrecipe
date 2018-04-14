@@ -1,0 +1,6 @@
+img {
+    display:inline-block;
+    overflow:hidden;
+   
+    max-height:300px;
+}
