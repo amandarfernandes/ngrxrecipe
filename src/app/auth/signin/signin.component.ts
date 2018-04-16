@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import * as fromApp from '../../store/app.reducers';
+import * as AuthActions from '../store/auth.actions';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-signup',
@@ -10,14 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-
-  constructor(private authService:AuthService) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() { }
 
-  onSignin(form:NgForm) {
+  onSignin(form: NgForm) {
     const {email, password} = form.value;
-    this.authService.signinUser(email,password);
+    this.store.dispatch(new AuthActions.StartSignin({email, password}));
   }
 
 }
